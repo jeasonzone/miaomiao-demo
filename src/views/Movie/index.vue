@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <Header title="喵喵电影" />
+    <Header title="⽠⼦电影" />
     <div id="content">
       <div class="movie_menu">
         <router-link tag="div" to="/movie/city" class="city_name">
@@ -76,12 +76,12 @@ export default {
   line-height: 45px;
 }
 .movie_menu .city_name.active {
-  color: #ef4238;
-  border-bottom: 2px #ef4238 solid;
+  color: #17ebb6;
+  border-bottom: 2px #17ebb6 solid;
 }
 .movie_menu .city_name.router-link-active {
-  color: #ef4238;
-  border-bottom: 2px #ef4238 solid;
+  color: #17ebb6;
+  border-bottom: 2px #17ebb6 solid;
 }
 .movie_menu .hot_swtich {
   display: flex;
@@ -97,12 +97,12 @@ export default {
   font-weight: 700;
 }
 .movie_menu .hot_item.active {
-  color: #ef4238;
-  border-bottom: 2px #ef4238 solid;
+  color: #17ebb6;
+  border-bottom: 2px #17ebb6 solid;
 }
 .movie_menu .hot_item.router-link-active {
-  color: #ef4238;
-  border-bottom: 2px #ef4238 solid;
+  color: #17ebb6;
+  border-bottom: 2px #17ebb6 solid;
 }
 .movie_menu .search_entry {
   margin-right: 20px;
@@ -110,15 +110,15 @@ export default {
   line-height: 45px;
 }
 .movie_menu .search_entry.active {
-  color: #ef4238;
-  border-bottom: 2px #ef4238 solid;
+  color: #17ebb6;
+  border-bottom: 2px #17ebb6 solid;
 }
 .movie_menu .search_entry.router-link-active {
-  color: #ef4238;
-  border-bottom: 2px #ef4238 solid;
+  color: #17ebb6;
+  border-bottom: 2px #17ebb6 solid;
 }
 .movie_menu .search_entry i {
   font-size: 24px;
-  color: red;
+  color: #17ebb6;
 }
 </style>

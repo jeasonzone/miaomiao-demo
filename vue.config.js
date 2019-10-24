@@ -1,4 +1,8 @@
 module.exports={
+    publicPath:'./',
+    //publicPath:'/jeasonDemo',
+    //baseUrl: './',
+    //outputDir: 'dist',
     devServer:{
         proxy:{
             '/api':{
