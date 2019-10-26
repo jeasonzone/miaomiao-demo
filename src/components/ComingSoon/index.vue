@@ -1,9 +1,10 @@
 <template>
   <div class="movie_body">
     <Loading v-if="isLoading" />
-    <Scroller v-else>
+    <Scroller v-else :handleToScroll="handleToScroll" :handleToTouchEnd="handleToTouchEnd">
       <ul>
-        <li v-for="item in comingList" v-bind:key="item.id"  @tap="handleToDetail(item.id)">
+        <li class="pullDown">{{pullDownMsg}}</li>
+        <li v-for="item in comingList" v-bind:key="item.id" @tap="handleToDetail(item.id)">
           <div class="pic_show">
             <img v-bind:src="item.img | setWH('128.180')" />
           </div>
@@ -32,25 +33,48 @@ export default {
     return {
       comingList: [],
       isLoading: true,
-      preCityId:-1
+      preCityId: -1,
+      pullDownMsg: ""
     };
   },
   activated() {
     var cityId = this.$store.state.city.id;
-    if( this.prevCityId === cityId ){ return; }
+    if (this.prevCityId === cityId) {
+      return;
+    }
     this.isLoading = true;
-    this.axios.get("/api/movieComingList?cityId="+cityId).then(res => {
+    this.axios.get("/api/movieComingList?cityId=" + cityId).then(res => {
       var msg = res.data.msg;
       if (msg === "ok") {
         this.comingList = res.data.data.comingList;
-        this.isLoading=false;
+        this.isLoading = false;
         this.prevCityId = cityId;
       }
     });
   },
-  methods:{
-    handleToDetail(movieId){
-      this.$router.push('/movie/detail/2/'+movieId);
+  methods: {
+    handleToDetail(movieId) {
+      this.$router.push("/movie/detail/2/" + movieId);
+    },
+    handleToScroll(pos) {
+      if (pos.y > 30) {
+        this.pullDownMsg = "努力刷新中…";
+      }
+    },
+    handleToTouchEnd(pos) {
+      if (pos.y > 30) {
+        var cityId = this.$store.state.city.id;
+        this.axios.get("/api/movieComingList?cityId=" + cityId).then(res => {
+          var msg = res.data.msg;
+          if (msg === "ok") {
+            this.pullDownMsg = "更新完成";
+            setTimeout(() => {
+              this.movieList = res.data.data.movieList;
+              this.pullDownMsg = "";
+            }, 1000);
+          }
+        });
+      }
     }
   }
 };
@@ -125,5 +149,11 @@ export default {
 }
 .movie_body .btn_pre {
   background-color: #3c9fe6;
+}
+.movie_body .pullDown {
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: rgb(39, 117, 206);
 }
 </style>

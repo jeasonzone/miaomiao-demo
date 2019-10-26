@@ -62,7 +62,8 @@ export default {
     },
     handleToTouchEnd(pos) {
       if (pos.y > 30) {
-        this.axios.get("/api/movieOnInfoList?cityId=13").then(res => {
+        var cityId=this.$store.state.city.id;
+        this.axios.get("/api/movieOnInfoList?cityId="+cityId).then(res => {
           var msg = res.data.msg;
           if (msg === "ok") {
             this.pullDownMsg = "更新完成";
@@ -152,10 +153,6 @@ export default {
   margin: 0;
   padding: 0;
   border: none;
-}
-.pullDown {
-  margin: 0;
-  padding: 0;
-  border: none;
+  color: rgb(39, 117, 206);
 }
 </style>
