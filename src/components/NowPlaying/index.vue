@@ -1,10 +1,10 @@
 <template>
   <div class="movie_body" ref="movie_body">
-    <Loading v-if="isLoading"/>
+    <Loading v-if="isLoading" />
     <Scroller v-else :handleToScroll="handleToScroll" :handleToTouchEnd="handleToTouchEnd">
       <ul>
         <li class="pullDown">{{pullDownMsg}}</li>
-        <li v-for="item in movieList" v-bind:key="item.id"  @tap="handleToDetail(item.id)">
+        <li v-for="item in movieList" v-bind:key="item.id" @tap="handleToDetail(item.id)">
           <div class="pic_show">
             <img v-bind:src="item.img|setWH('128.180')" />
           </div>
@@ -20,7 +20,8 @@
             <p>主演: {{item.star}}</p>
             <p>{{item.showInfo}}</p>
           </div>
-          <div class="btn_mall">购票</div>
+          <!-- <div class="btn_mall">购票</div> -->
+          <van-button round type="info" class="btn_mall">购票</van-button>
         </li>
       </ul>
     </Scroller>
@@ -34,15 +35,17 @@ export default {
     return {
       movieList: [],
       pullDownMsg: "",
-      isLoading : true,
-      preCityId:-1
+      isLoading: true,
+      preCityId: -1
     };
   },
   activated() {
     var cityId = this.$store.state.city.id;
-    if( this.prevCityId === cityId ){ return; }
+    if (this.prevCityId === cityId) {
+      return;
+    }
     this.isLoading = true;
-    this.axios.get("/api/movieOnInfoList?cityId="+cityId).then(res => {
+    this.axios.get("/api/movieOnInfoList?cityId=" + cityId).then(res => {
       var msg = res.data.msg;
       if (msg === "ok") {
         this.movieList = res.data.data.movieList;
@@ -53,7 +56,7 @@ export default {
   },
   methods: {
     handleToDetail(movieId) {
-      this.$router.push('/movie/detail/1/'+movieId);
+      this.$router.push("/movie/detail/1/" + movieId);
     },
     handleToScroll(pos) {
       if (pos.y > 30) {
@@ -62,8 +65,8 @@ export default {
     },
     handleToTouchEnd(pos) {
       if (pos.y > 30) {
-        var cityId=this.$store.state.city.id;
-        this.axios.get("/api/movieOnInfoList?cityId="+cityId).then(res => {
+        var cityId = this.$store.state.city.id;
+        this.axios.get("/api/movieOnInfoList?cityId=" + cityId).then(res => {
           var msg = res.data.msg;
           if (msg === "ok") {
             this.pullDownMsg = "更新完成";
@@ -134,7 +137,7 @@ export default {
   right: 10px;
   top: 5px;
 }
-.movie_body .btn_mall,
+/* .movie_body .btn_mall,
 .movie_body .btn_pre {
   width: 47px;
   height: 27px;
@@ -148,6 +151,12 @@ export default {
 }
 .movie_body .btn_pre {
   background-color: #3c9fe6;
+} */
+.movie_body .btn_mall {
+  width: 64px;
+  height: 27px;
+  line-height: 28px;
+  background-color: #70b6a4;
 }
 .movie_body .pullDown {
   margin: 0;

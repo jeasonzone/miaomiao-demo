@@ -19,7 +19,8 @@
             <p>主演: {{item.star}}</p>
             <p>{{item.rt}}上映</p>
           </div>
-          <div class="btn_pre">预售</div>
+          <!-- <div class="btn_pre">预售</div> -->
+          <van-button round type="info" class="btn_pre">预售</van-button>
         </li>
       </ul>
     </Scroller>
@@ -135,7 +136,7 @@ export default {
   right: 10px;
   top: 5px;
 }
-.movie_body .btn_mall,
+/* .movie_body .btn_mall,
 .movie_body .btn_pre {
   width: 47px;
   height: 27px;
@@ -146,8 +147,12 @@ export default {
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
-}
+} */
+
 .movie_body .btn_pre {
+  width: 64px;
+  height: 27px;
+  line-height: 28px;
   background-color: #3c9fe6;
 }
 .movie_body .pullDown {
